@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday!</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #fce4ec, #e0f7fa);
+      font-family: 'Comic Sans MS', cursive;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 4rem;
+      color: #ec407a;
+      margin-top: 40px;
+      text-shadow: 2px 2px white;
+    }
+
+    .avatar {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid #fff;
+      box-shadow: 0 0 20px pink;
+      margin-top: 20px;
+    }
+
+    #message {
+      font-size: 1.5rem;
+      color: #555;
+      margin: 30px auto;
+      width: 60%;
+      white-space: pre-line;
+      min-height: 60px;
+    }
+
+    button {
+      font-size: 1.2rem;
+      padding: 14px 30px;
+      background-color: #ff80ab;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #ec407a;
+    }
+
+    .balloon, .confetti {
+      position: absolute;
+      z-index: 1;
+    }
+
+    .balloon {
+      width: 60px;
+      height: 80px;
+      border-radius: 50% 50% 50% 50%;
+      animation: float 10s infinite ease-in;
+    }
+
+    .balloon::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      width: 2px;
+      height: 20px;
+      background: #333;
+    }
+
+    .confetti {
+      width: 10px;
+      height: 10px;
+      animation: fall 6s linear infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-120vh); opacity: 0.5; }
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎉 Happy Birthday! 🎂</h1>
+  <img src="avatar.jpg" alt="Ảnh người được chúc" class="avatar">
+  <p id="message"></p>
+  <button onclick="startParty()">💖 Bắt đầu tiệc 🎶</button>
+
+  <audio id="music" loop>
+    <source src="happy-birthday.mp3" type="audio/mpeg">
+    Trình duyệt của bạn không hỗ trợ phát nhạc.
+  </audio>
+
+  <script>
+    const msg = "Chúc bạn một tuổi mới tràn ngập niềm vui, sức khỏe và thật nhiều điều bất ngờ dễ thương! 🎁✨";
+    let i = 0;
+
+    function typeMessage() {
+      if (i < msg.length) {
+        document.getElementById("message").innerHTML += msg.charAt(i);
+        i++;
+        setTimeout(typeMessage, 60);
+      }
+    }
+
+    function startParty() {
+      document.getElementById("music").play();
+      typeMessage();
+
+      for (let i = 0; i < 25; i++) {
+        const b = document.createElement('div');
+        b.classList.add('balloon');
+        b.style.left = `${Math.random() * 100}%`;
+        b.style.backgroundColor = `hsl(${Math.random()*360}, 100%, 80%)`;
+        b.style.animationDuration = `${7 + Math.random()*3}s`;
+        document.body.appendChild(b);
+      }
+
+      for (let i = 0; i < 80; i++) {
+        const c = document.createElement('div');
+        c.classList.add('confetti');
+        c.style.left = `${Math.random() * 100}%`;
+        c.style.top = `${Math.random() * -100}px`;
+        c.style.backgroundColor = `hsl(${Math.random()*360}, 100%, 60%)`;
+        c.style.animationDuration = `${2 + Math.random()*2}s`;
+        document.body.appendChild(c);
+      }
+    }
+  </script>
+
+</body>
+</html>
